@@ -2,30 +2,20 @@ import { React } from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
-function Feed() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed Screen</Text>
-    </View>
-  );
-}
-
-function Article() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Article Screen</Text>
-    </View>
-  );
-}
+import PokemonList from './Screens/PokemonList';
+import Settings from './Screens/Settings';
+import StyleTesting from './Screens/Style-Testing';
+import GuessingGame from './Screens/GuessingGame';
 
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
+      <Drawer.Screen name="GuessingGame" component={GuessingGame} />
+      <Drawer.Screen name="PokemonList" component={PokemonList} />
+      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="StyleTesting" component={StyleTesting} />
     </Drawer.Navigator>
   );
 }
@@ -33,7 +23,7 @@ function MyDrawer() {
 export default function App() {
   return (
     <NavigationContainer>
-      <MyDrawer />
+      <MyDrawer/>
     </NavigationContainer>
   );
 }
