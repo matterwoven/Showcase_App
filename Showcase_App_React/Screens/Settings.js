@@ -1,36 +1,55 @@
 import { StyleSheet, Pressable, View, Text, Alert, Button} from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
+import { useState } from "react";
+import { Stack } from "@react-navigation/native-stack"
 
-export default function Settings() {
+export default function Settings( navigation ) {
 
-  const darkMode = false;
+  const [GuessingActive, setGuessingActive] = useState(true);
+  const [PokemonActive, setPokemonActive] = useState(true);
+  const [StyleTestActive, setStyleTestActive] = useState(true);
+
+  const [darkMode, setDarkMode] = useState(false);
+
   const flipFlop = () => {
-    if (darkMode === false){
-        darkMode = true
-        Alert.alert('Set to dark mode')
-    }
-    else {
-        darkMode = false
-        Alert.alert('Set to light mode')
+    if (darkMode === false) {
+        setDarkMode(true);
+        Alert.alert('Set to dark mode');
+    } else {
+        setDarkMode(false);
+        Alert.alert('Set to light mode');
     }
   }
 
+  const setPage = (page) => {
+    if (page === 'Pokemon') {
+      setPokemonActive(!PokemonActive);
+      Alert.alert(`Set Pokemon List to ${!PokemonActive}`);
+    }
+    else if (page === 'Guessing') {
+      setGuessingActive(!GuessingActive);
+      Alert.alert(`Set Guessing Game to ${!GuessingActive}`);
+    }
+    else if (page === 'StyleTest') {
+      setStyleTestActive(!StyleTestActive);
+      Alert.alert(`Set Style Test to ${!StyleTestActive}`);
+    }
+  }
   return (
     <View style={darkMode? darkStyles.container : lightStyles.container }>
-        <Button title="Press me" onPress={() => {flipFlop}}/>
         <TextInput style={darkMode? darkStyles.Descriptors : lightStyles.Descriptors }>General toggles</TextInput>
-        <Pressable style={darkMode? darkStyles.settings : lightStyles.settings }>
+        <Pressable style={darkMode? darkStyles.settings : lightStyles.settings} onPress={flipFlop}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text }>Toggle Dark Mode</Text>
         </Pressable>
         <TextInput style={darkMode? darkStyles.Descriptors : lightStyles.Descriptors }>Page settings</TextInput>
-        <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}>
+        <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('Pokemon')}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text}>Toggle Pokemon List</Text>
         </Pressable>
-         <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}>
+         <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('Guessing')}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text}>Toggle Guessing Game</Text>
         </Pressable>
-        <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}>
+        <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('StyleTest')}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text}>Setting Style Testing</Text>
         </Pressable>
     </View>
@@ -44,36 +63,43 @@ const darkStyles = StyleSheet.create({
       padding: 15,
       alignItems: "center",
       justifyContent: "center",
+      backgroundColor: "#212121"
     },
     Text: {
       alignSelf: "center",
       textAlign: "center",
       fontSize: "14%",
       //Affected by settings
-      color: "white",
+      color: "#dbdad5",
       //Affected by settings
     },
     settings: { 
-      padding: 4,
-      margin: "auto",
+      padding: 2,
+      margin: "7%",
       borderRadius: 7,
       height: "10%",
       width: "50%",
       alignItems: "center",
       //Affected by settings
-      
-      backgroundColor: "white",       
+      backgroundColor: "#363431",       
       shadowOffset: 3,
-      shadowColor: "black",
-      shadowOpacity: 0.2,
+      shadowColor: "#ffffff",
+      shadowRadius: 2,
+      shadowOpacity: 0.4,
       //Affected by settings
     },
     Descriptors: {
       fontWeight:"bold",
-      borderBottomColor:"black",
+      borderBottomColor:"#ffffff",
       borderBottomWidth: 1,
       paddingBottom: 1,
-    }
+      color: "#dbdad5",
+    },
+    DarkButton: {
+      backgroundColor: "white",
+      borderColor: "white",
+      padding: 5,
+    },
 });
 
 const lightStyles = StyleSheet.create({
@@ -93,8 +119,8 @@ const lightStyles = StyleSheet.create({
       //Affected by settings
     },
     settings: { 
-      padding: 4,
-      margin: "auto",
+      padding: 2,
+      margin: "7%",
       borderRadius: 7,
       height: "10%",
       width: "50%",
@@ -112,5 +138,10 @@ const lightStyles = StyleSheet.create({
       borderBottomColor:"black",
       borderBottomWidth: 1,
       paddingBottom: 1,
-    }
+    },
+    DarkButton: {
+      backgroundColor: "white",
+      borderColor: "white",
+      padding: 5,
+    },
   });
