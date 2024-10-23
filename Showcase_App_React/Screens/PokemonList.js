@@ -14,29 +14,30 @@ export default function PokemonList() {
   const [sound, setSound] = useState(null);
   const [error, setError] = useState(null);
 
+  
+
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
         setIsLoading(true);
-        const list = await fetchPokemonList(); // Fetch the list of Pokémon
+        const list = await fetchPokemonList();
         const detailedList = [];
         for (const pokemon of list) {
-          const details = await fetchPokemonDetails(pokemon.url); // Fetch details of each Pokémon
+          const details = await fetchPokemonDetails(pokemon.url);
           detailedList.push(details);
         }
-        setPokemonList(detailedList); // Update state with Pokémon details
+        setPokemonList(detailedList);
       } catch (error) {
-        setError(error.message); // Set error if any
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
     };
     fetchPokemon();
 
-    return sound ? () => sound.unloadAsync() : undefined; // Clean up sound
+    return sound ? () => sound.unloadAsync() : undefined;
   }, [sound]);
 
-  // Function to play Pokémon cry sound
   async function playSound(url) {
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync({ uri: url });
@@ -45,35 +46,37 @@ export default function PokemonList() {
     await sound.playAsync();
   }
 
+
   function renderItem({ item }) {
     return (
       <View style={styles.pokemonContainer}>
-        <Text>{item.name}</Text>
+        <Text style={styles.pokemonName}>{item.name}</Text>
         <Image style={styles.pokemonImage} source={{ uri: item.sprites.front_default }} />
+        <View style={{flexWrap:"nowrap"}}>
         <Pressable
           style={styles.button}
           onPress={() => playSound(`https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${item.id}.ogg`)}
         >
           <Text style={styles.buttonText}>Play Cry</Text>
         </Pressable>
+        </View>
       </View>
     );
   }
 
   if (isLoading) {
-    return <Text>Loading...</Text>; // Display loading text while fetching data
+    return <Text>Loading...</Text>; 
   }
 
   if (error) {
-    return <Text>Error: {error}</Text>; // Display error message if there's an issue
+    return <Text>Error: {error}</Text>; 
   }
 
   if(placeholder)   
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Pokémon List</Text>
       <FlatList
-        horizontal
+        windowSize={3}
         data={pokemonList}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
@@ -91,7 +94,7 @@ export default function PokemonList() {
   }
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 2,
       padding: 20,
     },
     title: {
@@ -118,4 +121,10 @@ export default function PokemonList() {
       color: 'white',
       fontWeight: 'bold',
     },
+    pokemonName: {
+      fontFamily: 'cambria',
+      fontSize: 20,
+      fontWeight: "200",
+      fontWeight: "condensed"
+    }
   });;
