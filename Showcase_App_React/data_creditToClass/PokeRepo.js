@@ -10,7 +10,7 @@ export const fetchPokemonDetails = async (url) => {
     }
   };
   
-export const fetchPokemonList = async (limit = 70) => {
+export const fetchPokemonList = async (limit = 100) => {
     try {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon?limit=${limit}`
