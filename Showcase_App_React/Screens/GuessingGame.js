@@ -5,14 +5,12 @@ import { Pressable } from "react-native";
 export default function GuessingGame(){
   const placeholder = false
   if(placeholder) 
-      return (
+    return (
       //Logic simplified, make background of image white, place image, turn
       //pixels that are not white into black pixels, then we have our sillouhette
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Article Screen</Text>
-      </View>
-  ) 
-  else {
+      <Text>Fun stuff here</Text>
+    ) 
+    else {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Access Denied</Text>

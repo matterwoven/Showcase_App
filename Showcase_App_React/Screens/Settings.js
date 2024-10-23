@@ -72,6 +72,7 @@ const darkStyles = StyleSheet.create({
       //Affected by settings
       color: "#dbdad5",
       //Affected by settings
+      paddingVertical: 25,
     },
     settings: { 
       padding: 2,
@@ -117,6 +118,7 @@ const lightStyles = StyleSheet.create({
       //Affected by settings
       color: "black",
       //Affected by settings
+      paddingVertical: 25,
     },
     settings: { 
       padding: 2,
