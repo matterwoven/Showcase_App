@@ -38,7 +38,7 @@ export default function PokemonList() {
   }, [])
 
   useEffect(() => {
-    return sound ? () => sound.unloadAsync() : undefined;
+    return sound ? () => sound.unloadAsync() : undefined; //If sound returns false, undefined, if true, play
   }, [sound]);
 
   async function playSound(url) {
@@ -82,6 +82,7 @@ export default function PokemonList() {
             onPress={() =>
               playSound(
                 `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${item.id}.ogg`
+                //Problem, was unable to convert file type
               )
             }
           >

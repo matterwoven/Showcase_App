@@ -26,10 +26,10 @@ export default function Settings( navigation ) {
     if (page === 'Pokemon') {
       setPokemonActive(!PokemonActive);
       Alert.alert(`Set Pokemon List to ${!PokemonActive}`);
-    }
-    else if (page === 'Guessing') {
-      setGuessingActive(!GuessingActive);
-      Alert.alert(`Set Guessing Game to ${!GuessingActive}`);
+    // }
+    // else if (page === 'Guessing') {
+    //   setGuessingActive(!GuessingActive);
+    //   Alert.alert(`Set Guessing Game to ${!GuessingActive}`);
     }
     else if (page === 'StyleTest') {
       setStyleTestActive(!StyleTestActive);
@@ -46,9 +46,9 @@ export default function Settings( navigation ) {
         <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('Pokemon')}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text}>Toggle Pokemon List</Text>
         </Pressable>
-         <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('Guessing')}>
+         {/* <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('Guessing')}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text}>Toggle Guessing Game</Text>
-        </Pressable>
+        </Pressable> */}
         <Pressable style={darkMode? darkStyles.settings : lightStyles.settings}  onPress={() => setPage('StyleTest')}>
             <Text style={darkMode? darkStyles.Text : lightStyles.Text}>Setting Style Testing</Text>
         </Pressable>
